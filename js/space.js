@@ -24,5 +24,10 @@ $(document).ready(
 		setTimeout(function() {
 			$(".complete").removeClass('faded');
 		},32000);
+
+		$("#space").on("mousemove", function(e) {
+			// Move exploration zone when within space
+			$("#exploration_target").css('top', e.clientY).css('left', e.clientX);
+		})
 	}
 );

@@ -1,6 +1,8 @@
 body { background: #030303; font-family: Franklin Gothic Medium, Futara, Geneva;}
 
-#space { width:875px; height:300px; border:1px #222 solid; margin:auto; background:black; overflow:hidden; position:relative; }
+#space { width:875px; height:300px; border:1px #222 solid; margin:auto; background:black; overflow:hidden; position:relative; z-index:1; }
+
+#exploration_target { width:80px; height: 28px; margin-left:-40px; margin-top:-14px; border:1px solid red; position:absolute; top:-80px; left:-27px; z-index:2; }
 
 #space .loading, #space .complete { width:100%; line-height:300px; font-size:80px; color:#777; text-align:center; position:absolute; top:0; opacity: 1; -webkit-transition: all .8s linear; transition: all .8s linear;}
 #space .loading.faded, #space .complete.faded { opacity:.01; -webkit-transition: opacity .8s linear; transition: opacity .8s linear; }
