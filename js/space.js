@@ -2,18 +2,19 @@ $(document).ready(
 	function() {
 		setTimeout(function() {
 			$(".loading").addClass('faded');
-			for(var i = 0; i < 25; i++) { // 5 Random stars for now
+			for(var i = 0; i < 50; i++) {
 				var top = Math.random() * 300;
 				var left = Math.random() * 875;
 				var eId = 'space-it-' + i + Math.round(Math.random() * 1000);
-				var star = $('<div id="'+eId+'" class="' +  (Math.round(Math.random() * 10) % 4 == 0 ? 'star' : 'unknown') + '" style="top:' + top +'px;left:' + left +'px;"></div>');
-				$("#space").append(star);
+				var className = (Math.round(Math.random() * 11) % 10 == 0) ? 'star' : ((Math.round(Math.random() * 5) % 2 == 0) ? 'unknown' : 'speck');
+				var item = $('<div id="'+eId+'" class="item ' +  className + '" style="top:' + top +'px;left:' + left +'px;"></div>');
+				$("#space").append(item);
 			}
 		//	$("#space .star").addClass("advance");
 		}, 800)
 
 		setTimeout(function() {
-			$("#space .star").addClass("advance");
+			$("#space .item").addClass("advance");
 		}, 1075)
 
 		setTimeout(function() {
