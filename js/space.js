@@ -26,27 +26,34 @@ $(document).ready(
 			$(".complete").removeClass('faded');
 		},32000);
 */
-		this.target = $("#exploration_target")
 
 		function Space() {
 			this.universe = 1;
+			this.target = $("#exploration_target");
 			this.setListeners();
 			this.lastEvent = null;
 		};
 
 		Space.prototype.setTarget = function(e) {
-			if(e == null) debugger;
-			$("#exploration_target").addClass("motion").css('top', e.clientY).css('left', e.clientX);
-			setTimeout(function() {
-				$("#exploration_target").removeClass("motion");
-				this.setTarget(this.lastEvent);
-			}.bind(this), 200)
+			if(e) {
+				if(this.target.css('top') == e.clientY +'px' && this.target.css('left') == e.clientX +'px') {
+					console.log('we cool.')
+					this.target.removeClass("motion");
+					return false;
+				}
+				console.log(this.target.css('top'),' == ', e.clientY +'px',' && ', this.target.css('left'),' == ',e.clientX+'px');
+				this.target.addClass("motion").css('top', e.clientY).css('left', e.clientX);
+				setTimeout(function() {
+					this.target.removeClass("motion");
+					this.setTarget(this.lastEvent);
+				}.bind(this), 200)
+			}
 		};
 		
 		Space.prototype.setListeners = function() {
 			$("#space").on("mousemove", function(e) {
 				this.lastEvent = e;
-				if(!$("#exploration_target").hasClass("motion")) {
+				if(!this.target.hasClass("motion")) {
 					this.setTarget(e);
 				}
 			}.bind(this));
