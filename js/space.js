@@ -13,20 +13,6 @@ $(document).ready(
 		//	$("#space .star").addClass("advance");
 		}, 800)
 
-/*
-		setTimeout(function() {
-			$("#space .item").addClass("advance");
-		}, 1075)
-
-		setTimeout(function() {
-			$("#space").append($('<div class="complete faded"></div>'));
-		},31875)
-
-		setTimeout(function() {
-			$(".complete").removeClass('faded');
-		},32000);
-*/
-
 		function Space() {
 			this.universe = 1;
 			this.target = $("#exploration_target");
@@ -37,11 +23,9 @@ $(document).ready(
 		Space.prototype.setTarget = function(e) {
 			if(e) {
 				if(this.target.css('top') == e.clientY +'px' && this.target.css('left') == e.clientX +'px') {
-					console.log('we cool.')
 					this.target.removeClass("motion");
 					return false;
 				}
-				console.log(this.target.css('top'),' == ', e.clientY +'px',' && ', this.target.css('left'),' == ',e.clientX+'px');
 				this.target.addClass("motion").css('top', e.clientY).css('left', e.clientX);
 				setTimeout(function() {
 					this.target.removeClass("motion");
@@ -49,12 +33,30 @@ $(document).ready(
 				}.bind(this), 200)
 			}
 		};
+
+		Space.prototype.explore = function(e) {
+			$("#space").addClass("advance");
+			setTimeout(function() {
+				$("#space").append($('<div class="complete faded"></div>'));
+			},31875)
+
+			setTimeout(function() {
+				$(".complete").removeClass('faded');
+			},32000);
+
+		};
 		
 		Space.prototype.setListeners = function() {
 			$("#space").on("mousemove", function(e) {
 				this.lastEvent = e;
 				if(!this.target.hasClass("motion")) {
 					this.setTarget(e);
+				}
+			}.bind(this));
+
+			$("body").on("click", "#exploration_target", function(e) {
+				if(!$("#space").hasClass('advance')) {
+					this.explore();
 				}
 			}.bind(this));
 		};
