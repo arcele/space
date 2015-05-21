@@ -13,6 +13,7 @@ $(document).ready(
 		//	$("#space .star").addClass("advance");
 		}, 800)
 
+/*
 		setTimeout(function() {
 			$("#space .item").addClass("advance");
 		}, 1075)
@@ -24,10 +25,34 @@ $(document).ready(
 		setTimeout(function() {
 			$(".complete").removeClass('faded');
 		},32000);
+*/
+		this.target = $("#exploration_target")
 
-		$("#space").on("mousemove", function(e) {
-			// Move exploration zone when within space
-			$("#exploration_target").css('top', e.clientY).css('left', e.clientX);
-		})
+		function Space() {
+			this.universe = 1;
+			this.setListeners();
+			this.lastEvent = null;
+		};
+
+		Space.prototype.setTarget = function(e) {
+			if(e == null) debugger;
+			$("#exploration_target").addClass("motion").css('top', e.clientY).css('left', e.clientX);
+			setTimeout(function() {
+				$("#exploration_target").removeClass("motion");
+				this.setTarget(this.lastEvent);
+			}.bind(this), 200)
+		};
+		
+		Space.prototype.setListeners = function() {
+			$("#space").on("mousemove", function(e) {
+				this.lastEvent = e;
+				if(!$("#exploration_target").hasClass("motion")) {
+					this.setTarget(e);
+				}
+			}.bind(this));
+		};
+
+		space = new Space();
+	
 	}
 );
