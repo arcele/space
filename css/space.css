@@ -20,3 +20,9 @@ body { background: #030303; font-family: Franklin Gothic Medium, Futara, Geneva;
 #space.advance .star { width:33px; height:33px; -webkit-transition:all 30s linear; transition:all 30s linear;}
 #space.advance .unknown { width:4px; height:4px; -webkit-transition:all 30s linear; transition:all 30s linear;}
 #space.advance .speck { width:2px; height:2px; -webkit-transition:all 30s linear; transition: all 30s linear;}
+
+#directives { color: #cdcdcd; font-size:18px; width:100%; text-align:center; margin:8px 0;}
+
+#space ~ #directives span { display:inline; }
+#space.advance ~ #directives .preexplore { display:none; }
+#space:not(.advance) ~ #directives .exploring { display:none; }
