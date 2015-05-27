@@ -2,8 +2,7 @@ $(document).ready(
 	function() {
 		setTimeout(function() {
 			this.items = [];
-			$(".loading").addClass('faded');	
-			space = new Space();		
+			$(".loading").addClass('faded');		
 		}, 800)
 
 		function Space() {
@@ -29,7 +28,11 @@ $(document).ready(
 				var left = Math.random() * 875;
 				var eId = 'space-it-' + i + Math.round(Math.random() * 1000);
 				var className = (Math.round(Math.random() * 11) % 10 == 0) ? 'star' : ((Math.round(Math.random() * 5) % 2 == 0) ? 'unknown' : 'speck');
-				this.items.push($('<div id="'+eId+'" class="item ' +  className + '" style="top:' + top +'px;left:' + left +'px;"></div>'));;
+				var radius = -1;
+				if(className == 'star') {
+					radius = 1.85 + Math.random() * 3;
+				}
+				this.items.push($('<div id="'+eId+'" class="item ' +  className + '" style="top:' + top +'px;left:' + left +'px;" data-radius="'+radius+'"></div>'));
 			}
 		};
 
@@ -49,9 +52,15 @@ $(document).ready(
 
 		Space.prototype.explore = function(e) {
 			this.explorationVector = e;
-
-
-
+			var starMultiplier = 10;
+			for(var i = 0; i < this.items.length; i++) {
+				if(this.items[i].hasClass('star')) {
+					var finalRadius = this.items[i].data('radius') * starMultiplier;
+					this.items[i].css('transition', 'width 30s linear, height 30s linear')
+						.css('width',  finalRadius +'px')
+						.css('height', finalRadius + 'px');
+				}
+			}
 
 			$("#space").addClass("advance");
 			setTimeout(function() {

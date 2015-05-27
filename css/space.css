@@ -19,8 +19,9 @@ body { background: #030303; font-family: Franklin Gothic Medium, Futara, Geneva;
 #space .star { width:3px; height:3px; border-radius:100%; position:absolute; background-color:white; opacity:.99; border:1px solid #cecece;-webkit-box-shadow: 0px 0px 35px 7px rgba(255,255,255,0.55);-moz-box-shadow: 0px 0px 35px 7px rgba(255,255,255,0.55);box-shadow: 0px 0px 35px 7px rgba(255,255,255,0.55);}
 #space .unknown { width: 2px; height:2px; border-radius: 100%; position:absolute; background-color:white; }
 #space .speck { width:0px ; height:0px; border-radius: 100%; position:absolute; background-color:white; }
-
+/*
 #space.advance .star { width:33px; height:33px; -webkit-transition:all 30s linear; transition:all 30s linear;}
+*/
 #space.advance .unknown { width:4px; height:4px; -webkit-transition:all 30s linear; transition:all 30s linear;}
 #space.advance .speck { width:2px; height:2px; -webkit-transition:all 30s linear; transition: all 30s linear;}
 
