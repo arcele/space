@@ -56,9 +56,11 @@ $(document).ready(
 			for(var i = 0; i < this.items.length; i++) {
 				if(this.items[i].hasClass('star')) {
 					var finalRadius = this.items[i].data('radius') * starMultiplier;
-					this.items[i].css('transition', 'width 30s linear, height 30s linear')
+					this.items[i].css('transition', 'width 30s linear, height 30s linear, top 30s linear, left 30s linear')
 						.css('width',  finalRadius +'px')
-						.css('height', finalRadius + 'px');
+						.css('height', finalRadius + 'px')
+						.css('top', this.items[i].css('top').split('px')[0] - (starMultiplier / 2))
+						.css('left', this.items[i].css('left').split('px')[0] - (starMultiplier / 2));
 				}
 			}
 
