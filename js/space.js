@@ -10,7 +10,6 @@ $(document).ready(
 				var item = $('<div id="'+eId+'" class="item ' +  className + '" style="top:' + top +'px;left:' + left +'px;"></div>');
 				$("#space").append(item);
 			}
-		//	$("#space .star").addClass("advance");
 		}, 800)
 
 		function Space() {
@@ -35,6 +34,7 @@ $(document).ready(
 		};
 
 		Space.prototype.explore = function(e) {
+			this.explorationVector = e;
 			$("#space").addClass("advance");
 			setTimeout(function() {
 				$("#space").append($('<div class="complete faded"></div>'));

@@ -1,14 +1,14 @@
 body { background: #030303; font-family: Franklin Gothic Medium, Futara, Geneva;}
 
-#space { width:875px; height:300px; border:1px #222 solid; margin:auto; background:black; overflow:hidden; position:relative; z-index:1; }
-
+#space { width:875px; height:300px; border:1px #222 solid; margin:auto; background:black; overflow:hidden; position:relative; z-index:1; cursor:crosshair; }
+#space.advance { cursor: default; }
 /* was 80x28 */
-#exploration_target { width:10px; height: 10px; margin-left:-5px; margin-top:-5px; position:absolute; top:-80px; left:-27px; z-index:2; border-radius:5px;  border:1px solid #39D10F; font-size:14px; color: #39D10F; }
+#exploration_target { width:10px; height: 10px; margin-left:-6px; margin-top:-6px; position:absolute; top:-80px; left:-27px; z-index:2; border-radius:5px;  border:1px solid #39D10F; font-size:14px; color: #39D10F; cursor:crosshair; }
 #exploration_target:before { border:1px solid #39D10F; content:''; left:-36px; top:-11.5px; position:absolute; height:28px; width:15px; border-right:0px; }
 #exploration_target:after { border:1px solid #39D10F; content:''; left:30px; top:-11.5px; position:absolute; height:28px; width:15px; border-left:0px; }
-#exploration_target.motion { transition: all .35s ease;}
+#exploration_target.motion { transition: all .35s ease; }
 
-#space.advance + #exploration_target { opacity: 0.0; transition:opacity .85s ease-out;}
+#space.advance + #exploration_target { opacity: 0.0; transition:opacity .85s ease-out; cursor:default; }
 
 #space .loading, #space .complete { width:100%; line-height:300px; font-size:80px; color:#777; text-align:center; position:absolute; top:0; opacity: 1; -webkit-transition: all .8s linear; transition: all .8s linear;}
 #space .loading.faded, #space .complete.faded { opacity:.01; -webkit-transition: opacity .8s linear; transition: opacity .8s linear; }
