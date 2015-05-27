@@ -47,7 +47,7 @@ $(document).ready(
 		};
 		
 		Space.prototype.setListeners = function() {
-			$("#space").on("mousemove", function(e) {
+			$("body").on("mousemove", "#space:not(.advance)", function(e) {
 				this.lastEvent = e;
 				if(!this.target.hasClass("motion")) {
 					this.setTarget(e);
