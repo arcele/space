@@ -1,22 +1,36 @@
 $(document).ready(
 	function() {
 		setTimeout(function() {
-			$(".loading").addClass('faded');
+			this.items = [];
+			$(".loading").addClass('faded');	
+			space = new Space();		
+		}, 800)
+
+		function Space() {
+			this.universe = 1;
+			this.items = [];
+			this.target = $("#exploration_target");
+			this.space = $("#space");
+			this.setListeners();
+			this.lastEvent = null;
+			this.populateSpace();
+		};
+
+		Space.prototype.populateSpace = function() {
+			this.generateRandomSpace();
+			for(var i = 0; i < this.items.length; i++) {
+				this.space.append(this.items[i]);
+			}
+		};
+
+		Space.prototype.generateRandomSpace = function() {
 			for(var i = 0; i < 50; i++) {
 				var top = Math.random() * 300;
 				var left = Math.random() * 875;
 				var eId = 'space-it-' + i + Math.round(Math.random() * 1000);
 				var className = (Math.round(Math.random() * 11) % 10 == 0) ? 'star' : ((Math.round(Math.random() * 5) % 2 == 0) ? 'unknown' : 'speck');
-				var item = $('<div id="'+eId+'" class="item ' +  className + '" style="top:' + top +'px;left:' + left +'px;"></div>');
-				$("#space").append(item);
+				this.items.push($('<div id="'+eId+'" class="item ' +  className + '" style="top:' + top +'px;left:' + left +'px;"></div>'));;
 			}
-		}, 800)
-
-		function Space() {
-			this.universe = 1;
-			this.target = $("#exploration_target");
-			this.setListeners();
-			this.lastEvent = null;
 		};
 
 		Space.prototype.setTarget = function(e) {
@@ -35,6 +49,10 @@ $(document).ready(
 
 		Space.prototype.explore = function(e) {
 			this.explorationVector = e;
+
+
+
+
 			$("#space").addClass("advance");
 			setTimeout(function() {
 				$("#space").append($('<div class="complete faded"></div>'));
