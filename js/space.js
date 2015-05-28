@@ -1,9 +1,5 @@
 $(document).ready(
 	function() {
-		setTimeout(function() {
-			this.items = [];
-			$(".loading").addClass('faded');		
-		}, 800)
 
 		function Space() {
 			this.universe = 1;
@@ -12,17 +8,13 @@ $(document).ready(
 			this.space = $("#space");
 			this.setListeners();
 			this.lastEvent = null;
-			this.populateSpace();
+			setTimeout( function() {
+				this.getSpace();
+			}.bind(this), 250);
 		};
 
-		Space.prototype.populateSpace = function() {
-			this.generateRandomSpace();
-			for(var i = 0; i < this.items.length; i++) {
-				this.space.append(this.items[i]);
-			}
-		};
-
-		Space.prototype.generateRandomSpace = function() {
+		Space.prototype.getSpace = function() {
+			// Generate Random space for now.  This should be a $.get() call w/ popuplate space as the callback
 			for(var i = 0; i < 50; i++) {
 				var top = Math.random() * 300;
 				var left = Math.random() * 875;
@@ -33,6 +25,14 @@ $(document).ready(
 					radius = 1.85 + Math.random() * 3;
 				}
 				this.items.push($('<div id="'+eId+'" class="item ' +  className + '" style="top:' + top +'px;left:' + left +'px;" data-radius="'+radius+'"></div>'));
+			}
+			this.populateSpace();
+		};
+
+		Space.prototype.populateSpace = function() {
+			$("#loading").addClass("faded");
+			for(var i = 0; i < this.items.length; i++) {
+				this.space.append(this.items[i]);
 			}
 		};
 
@@ -91,6 +91,6 @@ $(document).ready(
 		};
 
 		space = new Space();
-	
+
 	}
 );

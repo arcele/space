@@ -31,5 +31,5 @@ body { background: #030303; font-family: Franklin Gothic Medium, Futara, Geneva;
 #directives { color: #cdcdcd; font-size:18px; width:100%; text-align:center; margin:8px 0;}
 
 #space ~ #directives span { display:inline; }
-#space.advance ~ #directives .preexplore, #space. { display:none; }
+#space.advance ~ #directives .preexplore { display:none; }
 #space:not(.advance) ~ #directives .exploring { display:none; }
