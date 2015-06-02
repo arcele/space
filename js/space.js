@@ -55,12 +55,33 @@ $(document).ready(
 			var starMultiplier = 10;
 			for(var i = 0; i < this.items.length; i++) {
 				if(this.items[i].hasClass('star')) {
+					// Determine star's "distance" from explorationVector
+					var pos = this.items[i].position();
+					var deltaX = pos.left - e.clientX;
+					var deltaY = pos.top - e.clientY; 
+					var distance = Math.sqrt(Math.pow(deltaX,2) + Math.pow(deltaY,2)); // quadradic, thanks pre-algebra
+					// Determine star's angle from explorationVector
+					var angle = Math.atan(deltaY / deltaX);
+					var linearVelocity = Math.pow(distance, 2) / 500; // The further from the exploration point the star, the faster it diverges from the current view
+
+					// This could be improved with some trig
+					var newTop, newLeft;
+					if(deltaY < 0) {
+						newTop = pos.top - linearVelocity;
+					} else {
+						newTop = pos.top + linearVelocity;
+					}
+					if(deltaX < 0) {
+						newLeft = pos.left - linearVelocity;
+					} else {
+						newLeft = pos.left + linearVelocity;
+					}
 					var finalRadius = this.items[i].data('radius') * starMultiplier;
 					this.items[i].css('transition', 'width 30s linear, height 30s linear, top 30s linear, left 30s linear')
 						.css('width',  finalRadius +'px')
 						.css('height', finalRadius + 'px')
-						.css('top', this.items[i].css('top').split('px')[0] - (starMultiplier / 2))
-						.css('left', this.items[i].css('left').split('px')[0] - (starMultiplier / 2));
+						.css('top', newTop)
+						.css('left', newLeft);
 				}
 			}
 
@@ -85,7 +106,7 @@ $(document).ready(
 
 			$("body").on("click", "#exploration_target", function(e) {
 				if(!$("#space").hasClass('advance')) {
-					this.explore();
+					this.explore(e);
 				}
 			}.bind(this));
 		};
